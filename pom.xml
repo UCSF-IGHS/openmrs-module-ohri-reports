@@ -9,7 +9,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>ohrireports</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>OHRI Reports</name>
@@ -20,7 +20,7 @@
 		<connection>scm:git:git@github.com:UCSF-IGHS/openmrs-module-ohri-reports.git</connection>
 		<developerConnection>scm:git:git@github.com:UCSF-IGHS/openmrs-module-ohri-reports.git</developerConnection>
 		<url>https://github.com/UCSF-IGHS/openmrs-module-ohri-reports</url>
-	  <tag>v1.0.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<modules>
