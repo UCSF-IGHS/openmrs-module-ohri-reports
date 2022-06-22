@@ -10,9 +10,11 @@
 package org.openmrs.module.ohrireports.reports.hts;
 
 import org.openmrs.api.EncounterService;
-import org.openmrs.module.ohrireports.reports.library.HtsEncounterDataLibrary;
-import org.openmrs.module.ohrireports.reports.library.HtsPatientDataLibrary;
+import org.openmrs.module.ohrireports.reports.library.EncounterDataLibrary;
+import org.openmrs.module.ohrireports.reports.library.PatientDataLibrary;
 import org.openmrs.module.reporting.cohort.definition.EncounterCohortDefinition;
+import org.openmrs.module.reporting.data.converter.AgeConverter;
+import org.openmrs.module.reporting.data.converter.ObsValueConverter;
 import org.openmrs.module.reporting.dataset.definition.EncounterDataSetDefinition;
 import org.openmrs.module.reporting.evaluation.parameter.Mapped;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
@@ -39,10 +41,10 @@ public class HtsReport implements ReportManager {
 	EncounterService encounterService;
 	
 	@Autowired
-	HtsPatientDataLibrary hpdl;
+	PatientDataLibrary hpdl;
 	
 	@Autowired
-	HtsEncounterDataLibrary hedl;
+	EncounterDataLibrary hedl;
 	
 	@Override
 	public String getUuid() {
@@ -87,17 +89,19 @@ public class HtsReport implements ReportManager {
 	
 	private void addColumns(EncounterDataSetDefinition edsd) {
 		edsd.addColumn("Name", hpdl.getName(), "");
-		edsd.addColumn("Age", hpdl.getAge(), "");
+		edsd.addColumn("Age", hpdl.getAge(), "", new AgeConverter());
 		edsd.addColumn("Sex", hpdl.getGender(), "");
-		edsd.addColumn("Setting of HIV test", hedl.getObsValue(SETTING_OF_HIV_TEST), "");
-		edsd.addColumn("Approach", hedl.getObsValue(APPROACH), "");
-		edsd.addColumn("Population type", hedl.getObsValue(POPULATION_TYPE), "");
-		edsd.addColumn("Initial HIV Test result", hedl.getObsValue(INITIAL_HIV_TEST_RESULT), "");
-		edsd.addColumn("Confirmatory HIV test result", hedl.getObsValue(CONFIRMATORY_HIV_TEST_RESULT), "");
-		edsd.addColumn("Final HIV Result", hedl.getObsValue(FINAL_HIV_RESULT), "");
-		edsd.addColumn("Date client received final result", hedl.getObsValue(DATE_CLIENT_RECEIVED_FINAL_RESULT), "");
+		edsd.addColumn("Setting of HIV test", hedl.getObsValue(SETTING_OF_HIV_TEST), "", new ObsValueConverter());
+		edsd.addColumn("Approach", hedl.getObsValue(APPROACH), "", new ObsValueConverter());
+		edsd.addColumn("Population type", hedl.getObsValue(POPULATION_TYPE), "", new ObsValueConverter());
+		edsd.addColumn("Initial HIV Test result", hedl.getObsValue(INITIAL_HIV_TEST_RESULT), "", new ObsValueConverter());
+		edsd.addColumn("Confirmatory HIV test result", hedl.getObsValue(CONFIRMATORY_HIV_TEST_RESULT), "",
+		    new ObsValueConverter());
+		edsd.addColumn("Final HIV Result", hedl.getObsValue(FINAL_HIV_RESULT), "", new ObsValueConverter());
+		edsd.addColumn("Date client received final result", hedl.getObsValue(DATE_CLIENT_RECEIVED_FINAL_RESULT), "",
+		    new ObsValueConverter());
 		edsd.addColumn("Linked to care and treatment in this facility",
-		    hedl.getObsValue(LINKED_TO_CARE_AND_TREATMENT_IN_THIS_FACILITY), "");
+		    hedl.getObsValue(LINKED_TO_CARE_AND_TREATMENT_IN_THIS_FACILITY), "", new ObsValueConverter());
 	}
 	
 	private Mapped<? extends EncounterQuery> getEncounterQuery() {

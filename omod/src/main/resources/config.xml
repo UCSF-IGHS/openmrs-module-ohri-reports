@@ -22,6 +22,9 @@
 		<require_module version="${reportingVersion}">
 			org.openmrs.module.reporting
 		</require_module>
+		<require_module version="${cohortVersion}">
+			org.openmrs.module.cohort
+		</require_module>
 	</require_modules>
 
 	<aware_of_modules>

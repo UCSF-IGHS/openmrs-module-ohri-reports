@@ -13,14 +13,24 @@
 	<description>API project for OHRI Reports</description>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>reporting-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-artifact</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>cohort-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
+
 </project>

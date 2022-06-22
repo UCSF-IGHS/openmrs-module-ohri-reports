@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
+import org.openmrs.module.ohrireports.cohorts.util.HtsStaticCohortsUtil;
 import org.openmrs.module.reporting.report.manager.ReportManager;
 import org.openmrs.module.reporting.report.manager.ReportManagerUtil;
 
@@ -36,6 +37,9 @@ public class OHRIReportsActivator extends BaseModuleActivator {
 			log.info("Setting up report " + reportManager.getName() + "...");
 			ReportManagerUtil.setupReport(reportManager);
 		}
+		
+		log.info("Setting up HTS static cohorts...");
+		HtsStaticCohortsUtil.setupHtsCohorts();
 	}
 	
 	/**

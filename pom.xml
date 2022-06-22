@@ -12,9 +12,9 @@
 	<artifactId>ohrireports</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+
 	<name>OHRI Reports</name>
 	<description>OpenMRS module for Packaging OHRI Reports powered by the Reporting Module</description>
-
 	<url>https://github.com/UCSF-IGHS/openmrs-module-ohri-reports</url>
 
 	<scm>
@@ -108,25 +108,72 @@
 				<artifactId>maven-artifact</artifactId>
 				<version>3.0.3</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>cohort-api</artifactId>
+				<version>${cohortVersion}</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
+
+		<finalName>${project.parent.artifactId}-${project.parent.version}</finalName>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					<configuration>
+						<source>8</source>
+						<target>8</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<!--
+                        <preparationGoals>clean install</preparationGoals>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <arguments>-Prelease</arguments>
+                        -->
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 	</build>
 
     <properties>
         <openmrsPlatformVersion>2.1.1</openmrsPlatformVersion>
 		<reportingVersion>1.19.0</reportingVersion>
+		<cohortVersion>3.0.0-SNAPSHOT</cohortVersion>
 	</properties>
+
+	<distributionManagement>
+
+		<repository>
+			<id>openmrs-repo-modules</id>
+			<name>Modules</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>openmrs-repo-snapshots</id>
+			<name>OpenMRS Snapshots</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+
+	</distributionManagement>
+
 </project>
